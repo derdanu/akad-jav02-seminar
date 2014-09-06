@@ -30,7 +30,7 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 	private JButton b_can = new JButton("Cancel");
 	private JButton b_del = new JButton("Del");
 	private JSpinner spinner = new JSpinner();
-	private JButton b_liste = new JButton("Aritkelliste");
+	private JButton b_liste = new JButton("Artikelliste");
 	
 	private Artikelverwaltung art = new Artikelverwaltung();
 	
@@ -46,15 +46,14 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		setVisible( true );
-		setTitle("AKAD JAV02 Calculator (C) 2014 Daniel Falkner");
-		setBounds(100, 100, 608, 414);	    
+		setTitle("AKAD JAV02");
+		//setBounds(100, 100, 608, 414);	    
 		setLayout(gl);	
 		  
 		add(new JLabel("Name"));
 		add(tf_n);
 		
 		add(new JLabel("Einkaufspreis"));
-				
 		add(tf_ek);
 		
 		add(new JLabel("Verkaufspreis"));
@@ -75,6 +74,7 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 		add(b_liste);
 		add(new JLabel(""));
 		
+		pack();
 	}
 	
 	@Override

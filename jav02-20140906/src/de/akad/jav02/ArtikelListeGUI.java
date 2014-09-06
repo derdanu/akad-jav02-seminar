@@ -2,17 +2,13 @@ package de.akad.jav02;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Vector;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 
 public class ArtikelListeGUI extends JFrame implements ActionListener {
@@ -22,7 +18,7 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private GridLayout gl = new GridLayout();
-	private JButton b_del = new JButton("Lšschen");
+	private JButton b_del = new JButton("Entfernen");
     private JTable table;
     private JComboBox spalten;
     private Artikelverwaltung art;
