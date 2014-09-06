@@ -56,7 +56,7 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	    spalten.addActionListener(this);
 	    
 	    
-	    add(new JLabel("Sortieren"));
+	    add(new JLabel("Sortieren nach Spalte: "));
 	    add(spalten);
 	    
 	    add(new JScrollPane(table));

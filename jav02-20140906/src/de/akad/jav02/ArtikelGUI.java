@@ -26,9 +26,9 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 	private JTextField tf_n = new JTextField();
 	private JFormattedTextField tf_ek = new JFormattedTextField(format);
 	private JFormattedTextField tf_vk = new JFormattedTextField(format);
-	private JButton b_add = new JButton("Add");
-	private JButton b_can = new JButton("Cancel");
-	private JButton b_del = new JButton("Del");
+	private JButton b_add = new JButton("Hinzufuegen");
+	private JButton b_can = new JButton("Abbrechen");
+	private JButton b_del = new JButton("Entfernen");
 	private JSpinner spinner = new JSpinner();
 	private JButton b_liste = new JButton("Artikelliste");
 	
