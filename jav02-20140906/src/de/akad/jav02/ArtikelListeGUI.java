@@ -93,15 +93,15 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 
 			int dbid = (Integer) this.table.getValueAt(this.table.getSelectedRow(), 0);
 			this.art.deleteArtikel(dbid);
-			//this.model.removeRow(this.table.getSelectedRow());
+
 			this.updateModel(art);
 			
 		} else if (arg0.getSource() == this.spalten) {
 			System.out.println(this.spalten.getSelectedIndex());
 			System.out.println(this.spalten.getSelectedItem());
 			this.art.sortTable((String) this.spalten.getSelectedItem());
-			this.model.fireTableDataChanged();
-		    this.table.repaint(); // Repaint all the component (all Cells).
+			
+			this.updateModel(art);
 		}
 	
 	}
