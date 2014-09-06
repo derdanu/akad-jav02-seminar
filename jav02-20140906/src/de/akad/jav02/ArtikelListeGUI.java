@@ -25,8 +25,11 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	private JButton b_del = new JButton("Lšschen");
     private JTable table;
     private JComboBox spalten;
-
+    private Artikelverwaltung art;
+    
 	public ArtikelListeGUI(Artikelverwaltung art) {
+		
+		this.art = art;
 		
 		gl.setColumns(2);
 		gl.setRows(2);
@@ -79,9 +82,9 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 
 		if(arg0.getSource() == this.b_del){
 
-			System.out.println(this.table.getSelectedRow());
-			this.table.removeRowSelectionInterval(this.table.getSelectedRow(), this.table.getSelectedRow());
-			
+			int dbid = (Integer) this.table.getValueAt(this.table.getSelectedRow(), 0);
+			this.art.deleteArtikel(dbid);
+
 		} else if (arg0.getSource() == this.spalten) {
 			System.out.println(this.spalten.getSelectedIndex());
 

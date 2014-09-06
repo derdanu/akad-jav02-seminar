@@ -17,32 +17,7 @@ public class Artikelverwaltung {
 	
 	public Artikelverwaltung()  {
 		
-		db = Datenbank.getInstance();		
-
-		try {
-			stm = db.getConnection().createStatement();
-			rst = stm.executeQuery("select * from artikel");
-			
-			while(rst.next()) {
-				
-				Artikel a = new Artikel();
-				a.setId(rst.getInt("id"));
-				a.setName(rst.getString("Name"));
-				a.setEk(rst.getDouble("ek"));
-				a.setVk(rst.getDouble("vk"));
-				
-				stamm.add(a);
-			
-			}
-			
-			rst.close();
-			stm.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-			
-		
+		this.loadArtikelFromDB();		
 	
 	}	
 	
@@ -94,24 +69,31 @@ public class Artikelverwaltung {
 
 	}
 	
-	public void deleteArtikel(Artikel a) {
+	public void deleteArtikel(int id) {
 		
 		String query = "DELETE FROM artikel WHERE id = ?";
 
 		try {
 
 			PreparedStatement st = this.db.getConnection().prepareStatement(query);
-		    st.setInt(1, a.getId());
+		    st.setInt(1, id);
 
 		    st.executeUpdate();
 		    st.close();
 			
-		    stamm.remove(a);
 
 		} catch (SQLException e) {
 		  e.printStackTrace();
 		}
 		
+		this.loadArtikelFromDB();
+		
+	}
+	
+	public void deleteArtikel(Artikel a) {
+		
+		this.deleteArtikel(a.getId());
+
 	}
 	
 	public Vector<String> getSpalten() {
@@ -146,5 +128,33 @@ public class Artikelverwaltung {
 		return 0;
 	}
 	
-	
+	private void loadArtikelFromDB() {
+		
+		stamm.clear();
+		
+		db = Datenbank.getInstance();		
+
+		try {
+			stm = db.getConnection().createStatement();
+			rst = stm.executeQuery("select * from artikel");
+			
+			while(rst.next()) {
+				
+				Artikel a = new Artikel();
+				a.setId(rst.getInt("id"));
+				a.setName(rst.getString("Name"));
+				a.setEk(rst.getDouble("ek"));
+				a.setVk(rst.getDouble("vk"));
+				
+				stamm.add(a);
+			
+			}
+			
+			rst.close();
+			stm.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }
