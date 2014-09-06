@@ -100,6 +100,12 @@ public class Artikelverwaltung {
 		return this.getSpNamen("artikel");
 	}
 	
+	public void sortTable(String spalte) {
+		String sql = "select * from artikel ORDER BY " + spalte;
+		System.out.println(sql);
+		this.loadArtikelFromDBReal(sql);
+	}
+	
 	private Vector<String> getSpNamen(String tab) {
 	    	
 		ResultSet rs   = null;
@@ -129,6 +135,10 @@ public class Artikelverwaltung {
 	}
 	
 	private void loadArtikelFromDB() {
+		this.loadArtikelFromDBReal("select * from artikel");
+	}
+	
+	private void loadArtikelFromDBReal(String sql) {
 		
 		stamm.clear();
 		
@@ -136,7 +146,7 @@ public class Artikelverwaltung {
 
 		try {
 			stm = db.getConnection().createStatement();
-			rst = stm.executeQuery("select * from artikel");
+			rst = stm.executeQuery(sql);
 			
 			while(rst.next()) {
 				

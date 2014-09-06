@@ -26,6 +26,7 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
     private JTable table;
     private JComboBox spalten;
     private Artikelverwaltung art;
+    private DefaultTableModel model;
     
 	public ArtikelListeGUI(Artikelverwaltung art) {
 		
@@ -49,7 +50,7 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 		};
 	
 		
-		DefaultTableModel model = new DefaultTableModel(null, ueberschrift);
+		model = new DefaultTableModel(null, ueberschrift);
 	    
 	    for (Artikel a: art.getDatenstamm()) {
 
@@ -59,15 +60,13 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	    }
 	    
 	    this.table = new JTable(model);
-	    
-	    
 
 	    spalten = new JComboBox(art.getSpalten());
 	 
 	    spalten.addActionListener(this);
 	    
 	    
-	    add(new JLabel("Filter"));
+	    add(new JLabel("Sortieren"));
 	    add(spalten);
 	    
 	    add(table);
@@ -84,9 +83,14 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 
 			int dbid = (Integer) this.table.getValueAt(this.table.getSelectedRow(), 0);
 			this.art.deleteArtikel(dbid);
+			this.model.removeRow(this.table.getSelectedRow());
 
 		} else if (arg0.getSource() == this.spalten) {
 			System.out.println(this.spalten.getSelectedIndex());
+			System.out.println(this.spalten.getSelectedItem());
+			this.art.sortTable((String) this.spalten.getSelectedItem());
+			this.model.fireTableDataChanged();
+		    this.table.repaint(); // Repaint all the component (all Cells).
 
 		}
 	
