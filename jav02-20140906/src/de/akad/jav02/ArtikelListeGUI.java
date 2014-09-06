@@ -34,16 +34,14 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 		
 		this.b_del.addActionListener(this);
 
-
 		setDefaultCloseOperation( JFrame.HIDE_ON_CLOSE);
-		setVisible( true );
+		setVisible(true);
 		setTitle("Artikelliste");
 		setBounds(100, 100, 608, 414);	    
 		setLayout(gl);	
 		
 		String[] ueberschrift = {
 				"ID", "Name", 	"EK", 	"VK"
-	
 		};
 
 	
@@ -87,19 +85,16 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 
 		if(arg0.getSource() == this.b_del){
-	
-			
+				
 			for (int i: this.table.getSelectedRows()) {
 				int dbid = (Integer) this.table.getValueAt(i, 0);
 				this.art.deleteArtikel(dbid);
 			}
 	
-
 			this.updateModel(art);
 			
 		} else if (arg0.getSource() == this.spalten) {
-			//System.out.println(this.spalten.getSelectedIndex());
-			//System.out.println(this.spalten.getSelectedItem());
+		
 			this.art.sortTable((String) this.spalten.getSelectedItem());
 			
 			this.updateModel(art);
