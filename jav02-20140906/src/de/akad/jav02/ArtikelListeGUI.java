@@ -101,8 +101,8 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 			this.updateModel(art);
 			
 		} else if (arg0.getSource() == this.spalten) {
-			System.out.println(this.spalten.getSelectedIndex());
-			System.out.println(this.spalten.getSelectedItem());
+			//System.out.println(this.spalten.getSelectedIndex());
+			//System.out.println(this.spalten.getSelectedItem());
 			this.art.sortTable((String) this.spalten.getSelectedItem());
 			
 			this.updateModel(art);
