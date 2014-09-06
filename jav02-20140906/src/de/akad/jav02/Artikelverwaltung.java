@@ -51,8 +51,6 @@ public class Artikelverwaltung {
 		       key = rs.getInt(1);
 		    }
 		    
-			//System.out.println("Id des neuen Datensatzes: " + key);
-	
 		    st.close();
 			
 		    Artikel a = new Artikel();
@@ -97,13 +95,15 @@ public class Artikelverwaltung {
 	}
 	
 	public Vector<String> getSpalten() {
+		
 		return this.getSpNamen("artikel");
 	}
 	
 	public void sortTable(String spalte) {
+		
 		String sql = "select * from artikel ORDER BY " + spalte;
-		System.out.println(sql);
 		this.loadArtikelFromDBReal(sql);
+		
 	}
 	
 	private Vector<String> getSpNamen(String tab) {
