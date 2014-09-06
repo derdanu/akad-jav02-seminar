@@ -47,7 +47,6 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		setVisible( true );
 		setTitle("AKAD JAV02");
-		//setBounds(100, 100, 608, 414);	    
 		setLayout(gl);	
 		  
 		add(new JLabel("Name"));
@@ -86,12 +85,6 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 			 Double vk = Double.parseDouble(this.tf_vk.getText().replace(",", "."));
 		 
 			 this.art.addArtikel(this.tf_n.getText(), ek, vk);
-			 
-			 System.out.println("Aktueller Datenstamm");
-			 for (Artikel a: this.art.getDatenstamm()) {
-				 System.out.println(a.getName() + " " + a.getEk() + " " + a.getVk());
-			 }
-	
 			 
 		 } else if (arg0.getSource() == this.b_can){
 			 this.tf_n.setText("");
