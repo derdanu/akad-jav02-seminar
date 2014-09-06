@@ -36,6 +36,8 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 	
 	public ArtikelGUI() {
 		
+		format.setGroupingUsed(false);
+		
 		gl.setColumns(2);
 		gl.setRows(7);
 		
