@@ -17,12 +17,12 @@ public class Artikelverwaltung {
 	
 	public Artikelverwaltung()  {
 		
-		db = Datenbank.getInstance();
-		
+		db = Datenbank.getInstance();		
 
 		try {
 			stm = db.getConnection().createStatement();
 			rst = stm.executeQuery("select * from artikel");
+			
 			while(rst.next()) {
 				
 				Artikel a = new Artikel();
@@ -34,11 +34,11 @@ public class Artikelverwaltung {
 				stamm.add(a);
 			
 			}
+			
 			rst.close();
 			stm.close();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 			
@@ -51,58 +51,54 @@ public class Artikelverwaltung {
 	}
 
 	public void addArtikel(String name, double ek, double vk) {
-		
-		
+			
 		String query = "INSERT INTO artikel ("
-				    + " name,"
-				    + " ek,"
-				    + " vk"
-				    + " ) VALUES ("
-				    + "?, ?, ?)";
+					+ " name,"
+					+ " ek,"
+					+ " vk"
+					+ " ) VALUES ("
+					+ "?, ?, ?)";
 
-		 try {
-		    // set all the preparedstatement parameters
+		try {
+
+			// Prepared Statement Parameter setzen
 		    PreparedStatement st = this.db.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		    st.setString(1, name);
 		    st.setDouble(2, ek);
 		    st.setDouble(3, vk);
 	
-	
-		    // execute the preparedstatement insert
+		    // Prepared Statement ausführen und Datenbank ID auslesen.
 		    st.executeUpdate();
 		    ResultSet rs = st.getGeneratedKeys();
+		    
 		    int key = 0;
 		    if ( rs.next() ) {
-		        // Retrieve the auto generated key(s).
 		       key = rs.getInt(1);
 		    }
 		    
-			System.out.println("Id des neuen Datensatzes: " + key);
+			//System.out.println("Id des neuen Datensatzes: " + key);
 	
 		    st.close();
 			
-			Artikel a = new Artikel();
+		    Artikel a = new Artikel();
 			a.setId(key);
 			a.setName(name);
 			a.setEk(ek);
 			a.setVk(vk);
 			
 			stamm.add(a);
-		  } 
-		  catch (SQLException e)
-		  {
-			e.printStackTrace();
-		  }
-
 		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 	public void deleteArtikel(Artikel a) {
 		
-		
 		String query = "DELETE FROM artikel WHERE id = ?";
 
-		 try {
+		try {
 
 			PreparedStatement st = this.db.getConnection().prepareStatement(query);
 		    st.setInt(1, a.getId());
@@ -112,11 +108,9 @@ public class Artikelverwaltung {
 			
 		    stamm.remove(a);
 
-		  } 
-		  catch (SQLException e)
-		  {
-			e.printStackTrace();
-		  }
+		} catch (SQLException e) {
+		  e.printStackTrace();
+		}
 		
 	}
 	
@@ -124,22 +118,24 @@ public class Artikelverwaltung {
 		return this.getSpNamen("artikel");
 	}
 	
-	 private Vector<String> getSpNamen(String tab) {
+	private Vector<String> getSpNamen(String tab) {
 	    	
-		 ResultSet rs   = null;
+		ResultSet rs   = null;
 	    
-		 Vector <String> daten = new Vector<String>();
+		Vector <String> daten = new Vector<String>();
 		
-		 try {
-				DatabaseMetaData meta = this.db.getConnection().getMetaData ();
-				rs = meta.getColumns(null, null, tab, null);
-	        	while (rs.next ()) { 
-	        		daten.add(rs.getString ("COLUMN_NAME"));
-	        	} 
-			}catch(SQLException ex) {
-	        	System.out.println("SQL Exception:" + ex.getMessage());
-	        	System.exit(1);
-	        }
+		try {
+			DatabaseMetaData meta = this.db.getConnection().getMetaData ();
+			rs = meta.getColumns(null, null, tab, null);
+	        
+			while (rs.next ()) { 
+	        	daten.add(rs.getString ("COLUMN_NAME"));
+	        } 
+			
+		} catch(SQLException ex) {
+	      	System.out.println("SQL Exception:" + ex.getMessage());
+		}
+		
 		return daten;
 		
 	}	
