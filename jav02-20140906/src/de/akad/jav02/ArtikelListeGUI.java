@@ -39,7 +39,7 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 		setLayout(gl);	
 		
 		String[] ueberschrift = {
-					"Name", 	"EK", 	"VK"
+					"ID", "Name", 	"EK", 	"VK"
 		
 		};
 	
@@ -48,7 +48,7 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	    
 	    for (Artikel a: art.getDatenstamm()) {
 
-	    	Object[] row = {a.getName(), a.getEk(), a.getVk()};
+	    	Object[] row = {a.getId(), a.getName(), a.getEk(), a.getVk()};
 	    	model.addRow(row);
 
 	    }

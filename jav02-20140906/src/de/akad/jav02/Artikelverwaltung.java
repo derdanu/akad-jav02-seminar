@@ -21,10 +21,15 @@ public class Artikelverwaltung {
 			stm = db.getConnection().createStatement();
 			rst = stm.executeQuery("select * from artikel");
 			while(rst.next()) {
-				this.addArtikel(rst.getString("Name"), 
-								rst.getDouble("ek"),
-								rst.getDouble("vk")
-								);
+				
+				Artikel a = new Artikel();
+				a.setId(rst.getInt("id"));
+				a.setName(rst.getString("Name"));
+				a.setEk(rst.getDouble("ek"));
+				a.setVk(rst.getDouble("vk"));
+				
+				stamm.add(a);
+			
 			}
 			rst.close();
 			stm.close();
