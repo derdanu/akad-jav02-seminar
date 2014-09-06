@@ -5,7 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.Vector;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,12 +24,12 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	private GridLayout gl = new GridLayout();
 	private JButton b_del = new JButton("Lšschen");
     private JTable table;
-
+    private JComboBox spalten;
 
 	public ArtikelListeGUI(Artikelverwaltung art) {
 		
 		gl.setColumns(2);
-		gl.setRows(1);
+		gl.setRows(2);
 		
 		this.b_del.addActionListener(this);
 
@@ -55,7 +57,16 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	    
 	    this.table = new JTable(model);
 	    
+	    
 
+	    spalten = new JComboBox(art.getSpalten());
+	 
+	    spalten.addActionListener(this);
+	    
+	    
+	    add(new JLabel("Filter"));
+	    add(spalten);
+	    
 	    add(table);
 		add(b_del);
 		
@@ -65,9 +76,16 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		System.out.println(this.table.getSelectedRow());
-		this.table.removeRowSelectionInterval(this.table.getSelectedRow(), this.table.getSelectedRow());
+
+		if(arg0.getSource() == this.b_del){
+
+			System.out.println(this.table.getSelectedRow());
+			this.table.removeRowSelectionInterval(this.table.getSelectedRow(), this.table.getSelectedRow());
+			
+		} else if (arg0.getSource() == this.spalten) {
+			System.out.println(this.spalten.getSelectedIndex());
+
+		}
 	
 	
 	}

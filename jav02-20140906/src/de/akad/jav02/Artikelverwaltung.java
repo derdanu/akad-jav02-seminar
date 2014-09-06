@@ -1,9 +1,12 @@
 package de.akad.jav02;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Vector;
 
 
 public class Artikelverwaltung {
@@ -118,6 +121,31 @@ public class Artikelverwaltung {
 		
 	}
 	
+	public Vector<String> getSpalten() {
+		return this.getSpNamen("artikel");
+	}
+	
+	 private Vector<String> getSpNamen(String tab) {
+	    	
+		 ResultSet rs   = null;
+	    
+		 Vector <String> daten = new Vector<String>();
+		
+		 try {
+				DatabaseMetaData meta = this.db.getConnection().getMetaData ();
+				rs = meta.getColumns(null, null, tab, null);
+	        	while (rs.next ()) { 
+	        		daten.add(rs.getString ("COLUMN_NAME"));
+	        	} 
+			}catch(SQLException ex) {
+	        	System.out.println("SQL Exception:" + ex.getMessage());
+	        	System.exit(1);
+	        }
+		return daten;
+		
+	}	
+	 
+	 
 	@SuppressWarnings("unused")
 	private int getNextID() {
 		return 0;
