@@ -90,9 +90,13 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 
 		if(arg0.getSource() == this.b_del){
-
-			int dbid = (Integer) this.table.getValueAt(this.table.getSelectedRow(), 0);
-			this.art.deleteArtikel(dbid);
+	
+			
+			for (int i: this.table.getSelectedRows()) {
+				int dbid = (Integer) this.table.getValueAt(i, 0);
+				this.art.deleteArtikel(dbid);
+			}
+	
 
 			this.updateModel(art);
 			
