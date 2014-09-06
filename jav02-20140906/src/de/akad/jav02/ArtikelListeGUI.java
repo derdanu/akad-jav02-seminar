@@ -45,21 +45,16 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 		setLayout(gl);	
 		
 		String[] ueberschrift = {
-					"ID", "Name", 	"EK", 	"VK"
-		
-		};
+				"ID", "Name", 	"EK", 	"VK"
 	
-		
+		};
+
+	
 		model = new DefaultTableModel(null, ueberschrift);
-	    
-	    for (Artikel a: art.getDatenstamm()) {
+	
+		this.updateModel(art);
 
-	    	Object[] row = {a.getId(), a.getName(), a.getEk(), a.getVk()};
-	    	model.addRow(row);
-
-	    }
-	    
-	    this.table = new JTable(model);
+		this.table = new JTable(model);
 
 	    spalten = new JComboBox(art.getSpalten());
 	 
@@ -72,9 +67,24 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	    add(table);
 		add(b_del);
 		
+	
 		
 	}
 
+	private void updateModel(Artikelverwaltung art) {
+		
+		
+		model.getDataVector().removeAllElements();
+	    
+	    for (Artikel a: art.getDatenstamm()) {
+	
+	    	Object[] row = {a.getId(), a.getName(), a.getEk(), a.getVk()};
+	    	model.addRow(row);
+	    }
+	    
+	    model.fireTableDataChanged();
+    
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -83,17 +93,16 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 
 			int dbid = (Integer) this.table.getValueAt(this.table.getSelectedRow(), 0);
 			this.art.deleteArtikel(dbid);
-			this.model.removeRow(this.table.getSelectedRow());
-
+			//this.model.removeRow(this.table.getSelectedRow());
+			this.updateModel(art);
+			
 		} else if (arg0.getSource() == this.spalten) {
 			System.out.println(this.spalten.getSelectedIndex());
 			System.out.println(this.spalten.getSelectedItem());
 			this.art.sortTable((String) this.spalten.getSelectedItem());
 			this.model.fireTableDataChanged();
 		    this.table.repaint(); // Repaint all the component (all Cells).
-
 		}
-	
 	
 	}
 	
