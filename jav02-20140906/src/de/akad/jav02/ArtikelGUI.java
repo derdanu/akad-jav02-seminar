@@ -31,12 +31,11 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 	private JButton b_del = new JButton("Del");
 	private JSpinner spinner = new JSpinner();
 	private JButton b_liste = new JButton("Aritkelliste");
-
 	
 	private Artikelverwaltung art = new Artikelverwaltung();
 	
 	public ArtikelGUI() {
-		  
+		
 		gl.setColumns(2);
 		gl.setRows(7);
 		
@@ -67,9 +66,7 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 		add(b_add);
 		add(b_can);
 		
-		
-		this.art.addArtikel("Dummy", 0, 0);
-	
+			
 		SpinnerListModel model = new SpinnerListModel(this.art.getDatenstamm());
 		spinner.setModel(model);
 		add(b_del);
