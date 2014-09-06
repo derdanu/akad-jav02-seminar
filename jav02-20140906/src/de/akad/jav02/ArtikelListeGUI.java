@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,7 +52,7 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 		this.updateModel(art);
 
 		this.table = new JTable(model);
-
+		
 	    spalten = new JComboBox(art.getSpalten());
 	 
 	    spalten.addActionListener(this);
@@ -60,7 +61,7 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	    add(new JLabel("Sortieren"));
 	    add(spalten);
 	    
-	    add(table);
+	    add(new JScrollPane(table));
 		add(b_del);
 		
 	
