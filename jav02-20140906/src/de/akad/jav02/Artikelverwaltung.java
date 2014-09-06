@@ -42,7 +42,7 @@ public class Artikelverwaltung {
 		    st.setDouble(2, ek);
 		    st.setDouble(3, vk);
 	
-		    // Prepared Statement ausführen und Datenbank ID auslesen.
+		    // Prepared Statement ausfuehren und Datenbank ID auslesen.
 		    st.executeUpdate();
 		    ResultSet rs = st.getGeneratedKeys();
 		    
@@ -131,6 +131,7 @@ public class Artikelverwaltung {
 	 
 	@SuppressWarnings("unused")
 	private int getNextID() {
+		// Wird nicht benoetigt.
 		return 0;
 	}
 	

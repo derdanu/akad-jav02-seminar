@@ -10,7 +10,7 @@ public class Datenbank {
 
 	// Eine (versteckte) Klassenvariable vom Typ der eigene Klasse
 	private static Datenbank instance;
-	// Verhindere die Erzeugung des Objektes über andere Methoden
+	// Verhindere die Erzeugung des Objektes ueber andere Methoden
 	private Datenbank() {
 		  
 		// this will load the MySQL driver, each DB has its own driver
@@ -31,9 +31,9 @@ public class Datenbank {
 		  
 	  }
 	  // Eine Zugriffsmethode auf Klassenebene, welches dir '''einmal''' ein konkretes 
-	  // Objekt erzeugt und dieses zurückliefert.
+	  // Objekt erzeugt und dieses zurueckliefert.
 	  // Durch 'synchronized' wird sichergestellt dass diese Methode nur von einem Thread 
-	  // zu einer Zeit durchlaufen wird. Der nächste Thread erhält immer eine komplett 
+	  // zu einer Zeit durchlaufen wird. Der naechste Thread erhaelt immer eine komplett 
 	  // initialisierte Instanz.
 	public static synchronized Datenbank getInstance () {
 		if (Datenbank.instance == null) {
