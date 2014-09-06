@@ -101,7 +101,7 @@ public class ArtikelGUI extends JFrame implements ActionListener {
 		 } else if (arg0.getSource() == this.b_del) {
 			 this.art.deleteArtikel((Artikel) this.spinner.getValue());
 		 } else if (arg0.getSource() == this.b_liste) {
-			 ArtikelListeGUI al = new ArtikelListeGUI(this.art);
+			 new ArtikelListeGUI(this.art);
 			 
 		 }
 	
