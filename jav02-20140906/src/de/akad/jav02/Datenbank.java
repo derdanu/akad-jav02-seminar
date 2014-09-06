@@ -24,9 +24,8 @@ public class Datenbank {
 	    	connect = DriverManager
 	    				.getConnection("jdbc:mysql://127.0.0.1/jav02?"
 	    							+ "user=jav02&password=test");
-			System.out.println("Verbunden....");
 		} catch (SQLException e) {
-			System.out.println("Fehler bei der Datenbankverdindung: " + e.getLocalizedMessage());
+			System.out.println("Fehler bei der Datenbankverbindung: " + e.getLocalizedMessage());
 		}
 		  
 	  }
