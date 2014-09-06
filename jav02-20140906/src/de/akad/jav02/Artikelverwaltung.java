@@ -96,7 +96,26 @@ public class Artikelverwaltung {
 	}
 	
 	public void deleteArtikel(Artikel a) {
-		stamm.remove(a);
+		
+		
+		String query = "DELETE FROM artikel WHERE id = ?";
+
+		 try {
+
+			PreparedStatement st = this.db.getConnection().prepareStatement(query);
+		    st.setInt(1, a.getId());
+
+		    st.executeUpdate();
+		    st.close();
+			
+		    stamm.remove(a);
+
+		  } 
+		  catch (SQLException e)
+		  {
+			e.printStackTrace();
+		  }
+		
 	}
 	
 	@SuppressWarnings("unused")
