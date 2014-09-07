@@ -64,17 +64,25 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 		
 	}
 
+	/**
+	 * JTable Datenmodell updaten
+	 * 
+	 * @param art	Artikelverwaltung
+	 * 
+	 */
 	private void updateModel(Artikelverwaltung art) {
 		
-		
+		// Alle Einträge löschen
 		model.getDataVector().removeAllElements();
 	    
+		// Artikel einlesen
 	    for (Artikel a: art.getDatenstamm()) {
 	
 	    	Object[] row = {a.getId(), a.getName(), a.getEk(), a.getVk()};
 	    	model.addRow(row);
 	    }
 	    
+	    // Dem Modell mitteilen, dass sich die Daten geaendert haben
 	    model.fireTableDataChanged();
     
 	}
