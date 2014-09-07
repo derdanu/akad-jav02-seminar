@@ -3,4 +3,6 @@ akad-jav02-seminar
 
 Akad Jav02 Seminar
 
-Nur Test Code
+Code wurde im Seminar immer erweitert zum Testen.
+
+Basis für das Assignment
