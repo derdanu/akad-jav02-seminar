@@ -14,10 +14,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class ArtikelListeGUI extends JFrame implements ActionListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	private GridLayout gl = new GridLayout();
 	private JButton b_del = new JButton("Entfernen");
     private JTable table;

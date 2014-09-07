@@ -14,13 +14,9 @@ import javax.swing.SpinnerListModel;
 
 public class ArtikelGUI extends JFrame implements ActionListener {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
-	 NumberFormat format = NumberFormat.getInstance();
-
+	NumberFormat format = NumberFormat.getInstance();
 	
 	private GridLayout gl = new GridLayout();
 	private JTextField tf_n = new JTextField();
