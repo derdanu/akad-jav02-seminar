@@ -90,19 +90,24 @@ public class ArtikelListeGUI extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
+		// Beim druecken des Entfernen Buttons
 		if(arg0.getSource() == this.b_del){
-				
+			
+			// Bei mehrfach Auswahl alle Artikel der Reihe nach entfernen
 			for (int i: this.table.getSelectedRows()) {
 				int dbid = (Integer) this.table.getValueAt(i, 0);
 				this.art.deleteArtikel(dbid);
 			}
 	
+			// Modell wieder neu einlesen
 			this.updateModel(art);
 			
-		} else if (arg0.getSource() == this.spalten) {
+		} else if (arg0.getSource() == this.spalten) { // Beim auswaehlen des Spalten Pulldowns zum Sortieren
 		
+			// Spalte zum Sortieren übergeben
 			this.art.sortTable((String) this.spalten.getSelectedItem());
 			
+			// Modell wieder neu einlesen
 			this.updateModel(art);
 		}
 	
