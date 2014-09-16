@@ -14,6 +14,8 @@ import java.sql.SQLException;
  */
 public class Datenbank {
 
+	private static final String DBURL = "jdbc:mysql://127.0.0.1/jav02?user=jav02&password=test";
+	
 	private Connection connect = null;
 
 	private static Datenbank instance;
@@ -27,9 +29,7 @@ public class Datenbank {
 		}
 	    // Verbindungsparameter setzen und zur Datenbank verbinden
 	    try {
-	    	connect = DriverManager
-	    				.getConnection("jdbc:mysql://127.0.0.1/jav02?"
-	    							+ "user=jav02&password=test");
+	    	connect = DriverManager.getConnection(DBURL);
 		} catch (SQLException e) {
 			System.out.println("Fehler bei der Datenbankverbindung: " + e.getLocalizedMessage());
 		}
