@@ -57,12 +57,15 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 	
 	public MVCView(MainController control) {
 
+		// View Settings
+		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
+		setTitle("AKAD JAV02");
+		setBounds(100, 100, 608, 414);
+		
 		
 		format.setGroupingUsed(false);
 		
-		gl.setColumns(2);
-		gl.setRows(7);
-		
+
 		this.b_add.addActionListener(control);
 		this.b_add.setActionCommand("add");
 		this.b_can.addActionListener(control);
@@ -70,14 +73,12 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 		this.b_del.addActionListener(control);
 		this.b_del.setActionCommand("del");
 		
-		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		setTitle("AKAD JAV02");
-		setBounds(100, 100, 608, 414);
-		
 		JPanel panel1 = new JPanel();
+
+		gl.setColumns(2);
+		gl.setRows(7);
 		
 		panel1.setLayout(gl);	
-		
 		
 		panel1.add(new JLabel("Name"));
 		panel1.add(tf_name);
@@ -103,15 +104,14 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 		
 		// Ab hier der zweite Tab
 		
+		this.b2_del.addActionListener(control);
+		this.b2_del.setActionCommand("del_liste");
+		
 		JPanel panel2 = new JPanel();
 						
 		gl2.setColumns(2);
 		gl2.setRows(2);
-		
-		this.b2_del.addActionListener(control);
-		this.b2_del.setActionCommand("del_liste");
-		
-			    
+					    
 		panel2.setLayout(gl2);	
 		
 		String[] ueberschrift = {"ID", "Name", 	"EK", 	"VK"};
@@ -158,7 +158,6 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 	    // Dem Modell mitteilen, dass sich die Daten geaendert haben
 	    this.model.fireTableDataChanged();
 	 
-	    System.out.println("Fire");
 	}
 
 	@Override
