@@ -1,4 +1,4 @@
-package de.akad.jav02;
+package de.akad.jav02.model;
 
 public class Artikel {
 

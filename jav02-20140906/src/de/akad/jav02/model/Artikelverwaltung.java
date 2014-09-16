@@ -1,14 +1,15 @@
-package de.akad.jav02;
+package de.akad.jav02.model;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.Vector;
 
 
-public class Artikelverwaltung {
+public class Artikelverwaltung extends Observable {
 	
 	private ArrayList<Artikel> stamm = new ArrayList<Artikel>();
 	private Datenbank db = null;
@@ -17,9 +18,12 @@ public class Artikelverwaltung {
 	
 	public Artikelverwaltung()  {
 		
-		this.loadArtikelFromDB();		
 	
 	}	
+	
+	public void initDBData() {
+		this.loadArtikelFromDB();
+	}
 	
 	public ArrayList<Artikel> getDatenstamm() {
 		return stamm;
@@ -59,7 +63,7 @@ public class Artikelverwaltung {
 			a.setEk(ek);
 			a.setVk(vk);
 			
-			stamm.add(a);
+			this.loadArtikelFromDB();
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -100,14 +104,18 @@ public class Artikelverwaltung {
 	}
 	
 	public void sortTable(String spalte) {
-		
+		setChanged();
+
 		String sql = "select * from artikel ORDER BY " + spalte;
 		this.loadArtikelFromDBReal(sql);
-		
+		notifyObservers(this.stamm);
+
 	}
 	
 	private Vector<String> getSpNamen(String tab) {
-	    	
+	    
+		
+		
 		ResultSet rs   = null;
 	    
 		Vector <String> daten = new Vector<String>();
@@ -127,16 +135,13 @@ public class Artikelverwaltung {
 		return daten;
 		
 	}	
-	 
-	 
-	@SuppressWarnings("unused")
-	private int getNextID() {
-		// Wird nicht benoetigt.
-		return 0;
-	}
-	
+
 	private void loadArtikelFromDB() {
-		this.loadArtikelFromDBReal("select * from artikel");
+		
+		setChanged();
+		this.loadArtikelFromDBReal("select * from artikel");		
+		notifyObservers(this.stamm);
+		
 	}
 	
 	private void loadArtikelFromDBReal(String sql) {
@@ -158,7 +163,6 @@ public class Artikelverwaltung {
 				a.setVk(rst.getDouble("vk"));
 				
 				stamm.add(a);
-			
 			}
 			
 			rst.close();
