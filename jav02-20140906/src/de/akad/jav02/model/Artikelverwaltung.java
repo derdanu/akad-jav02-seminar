@@ -8,18 +8,19 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Vector;
 
-
+/**
+ * 
+ * Artikelverwaltung Modell
+ * 
+ * @author dfalkner, egrinschuk
+ *
+ */
 public class Artikelverwaltung extends Observable {
 	
 	private ArrayList<Artikel> stamm = new ArrayList<Artikel>();
 	private Datenbank db = null;
 	private Statement stm = null;
 	private ResultSet rst = null;
-	
-	public Artikelverwaltung()  {
-		
-	
-	}	
 	
 	public void initDBData() {
 		this.loadArtikelFromDB();
