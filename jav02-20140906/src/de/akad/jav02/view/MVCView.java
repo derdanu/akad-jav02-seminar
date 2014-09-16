@@ -25,10 +25,18 @@ import javax.swing.table.DefaultTableModel;
 import de.akad.jav02.controller.MainController;
 import de.akad.jav02.model.Artikel;
 
+
+/**
+ * 
+ * View Klasse
+ * 
+ * @author dfalkner, egrinschuk
+ *
+ */
 public class MVCView extends JFrame implements Observer, MVCViewInterface{
 
 	private static final long serialVersionUID = 1L;
-	
+		
 	private NumberFormat format = NumberFormat.getInstance();
 	private GridLayout gl = new GridLayout();
 	private GridLayout gl2 = new GridLayout();
@@ -41,12 +49,12 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 	private JButton b2_del = new JButton("Entfernen");
 	private JSpinner spinner = new JSpinner();
 	private JTabbedPane tabbedPane = new JTabbedPane();
-    private SpinnerListModel sp_model = new SpinnerListModel();
-
+	private SpinnerListModel sp_model = new SpinnerListModel();
 	private JTable table;
-    private JComboBox cb_sort;
-    private DefaultTableModel model;
+	private JComboBox cb_sort;
+	private DefaultTableModel model;
     
+	
 	public MVCView(MainController control) {
 
 		
@@ -61,15 +69,15 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 		this.b_can.setActionCommand("can");
 		this.b_del.addActionListener(control);
 		this.b_del.setActionCommand("del");
-
+		
 		setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		setTitle("AKAD JAV02");
 		setBounds(100, 100, 608, 414);
 		
 		JPanel panel1 = new JPanel();
-
+		
 		panel1.setLayout(gl);	
-
+		
 		
 		panel1.add(new JLabel("Name"));
 		panel1.add(tf_name);
@@ -79,7 +87,7 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 		
 		panel1.add(new JLabel("Verkaufspreis"));
 		panel1.add(tf_vk);
-	
+		
 		panel1.add(new JLabel(""));
 		panel1.add(new JLabel(""));
 		
@@ -92,11 +100,11 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 		
 			
 		this.tabbedPane.addTab("Artikel", panel1);
-
+		
 		
 		
 		JPanel panel2 = new JPanel();
-
+		
 		
 		
 		gl2.setColumns(2);
@@ -104,34 +112,34 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 		
 		this.b2_del.addActionListener(control);
 		this.b2_del.setActionCommand("del_liste");
-
+		
 			    
 		panel2.setLayout(gl2);	
 		
 		String[] ueberschrift = {
 				"ID", "Name", 	"EK", 	"VK"
-		};
-
-	
-		model = new DefaultTableModel(null, ueberschrift);
-	
-		this.table = new JTable(model);
+			};
 		
-	    this.cb_sort = new JComboBox();
-	 
-	    this.cb_sort.addActionListener(control);
-	    this.cb_sort.setActionCommand("sort");
-	    
-	    panel2.add(new JLabel("Sortieren nach Spalte: "));
-	    panel2.add(this.cb_sort);
-	    
-	    panel2.add(new JScrollPane(table));
-	    panel2.add(b2_del);	
 		
-	    
+			model = new DefaultTableModel(null, ueberschrift);
+		
+			this.table = new JTable(model);
+			
+		    this.cb_sort = new JComboBox();
+		 
+		    this.cb_sort.addActionListener(control);
+		    this.cb_sort.setActionCommand("sort");
+		
+		panel2.add(new JLabel("Sortieren nach Spalte: "));
+		panel2.add(this.cb_sort);
+		
+		panel2.add(new JScrollPane(table));
+		panel2.add(b2_del);	
+		
+		
 		this.tabbedPane.addTab("Artikelliste", panel2);
-
-	    
+		
+		
 		add(tabbedPane);
 		
 		pack();
