@@ -101,12 +101,10 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 			
 		this.tabbedPane.addTab("Artikel", panel1);
 		
-		
+		// Ab hier der zweite Tab
 		
 		JPanel panel2 = new JPanel();
-		
-		
-		
+						
 		gl2.setColumns(2);
 		gl2.setRows(2);
 		
@@ -116,19 +114,16 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 			    
 		panel2.setLayout(gl2);	
 		
-		String[] ueberschrift = {
-				"ID", "Name", 	"EK", 	"VK"
-			};
+		String[] ueberschrift = {"ID", "Name", 	"EK", 	"VK"};
+				
+		model = new DefaultTableModel(null, ueberschrift);
 		
-		
-			model = new DefaultTableModel(null, ueberschrift);
-		
-			this.table = new JTable(model);
+		this.table = new JTable(model);
 			
-		    this.cb_sort = new JComboBox();
+		this.cb_sort = new JComboBox();
 		 
-		    this.cb_sort.addActionListener(control);
-		    this.cb_sort.setActionCommand("sort");
+		this.cb_sort.addActionListener(control);
+		this.cb_sort.setActionCommand("sort");
 		
 		panel2.add(new JLabel("Sortieren nach Spalte: "));
 		panel2.add(this.cb_sort);
