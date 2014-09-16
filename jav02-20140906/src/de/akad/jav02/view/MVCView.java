@@ -142,14 +142,14 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 			
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		// Alle Einträge löschen
 		this.model.getDataVector().removeAllElements();
 	    
 		// Artikel einlesen
-	    ArrayList<Artikel> arg12 = (ArrayList<Artikel>) arg1;
-		for (Artikel a:  arg12) {
+		for (Artikel a:  (ArrayList<Artikel>) arg1) {
 	
 	    	Object[] row = {a.getId(), a.getName(), a.getEk(), a.getVk()};
 	    	this.model.addRow(row);
