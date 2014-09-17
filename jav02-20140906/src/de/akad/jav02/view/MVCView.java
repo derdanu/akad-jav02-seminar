@@ -40,6 +40,7 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 	private NumberFormat format = NumberFormat.getInstance();
 	private GridLayout gl = new GridLayout();
 	private GridLayout gl2 = new GridLayout();
+	private GridLayout gl3 = new GridLayout();
 	private JTextField tf_name = new JTextField();
 	private JFormattedTextField tf_ek = new JFormattedTextField(format);
 	private JFormattedTextField tf_vk = new JFormattedTextField(format);
@@ -50,8 +51,8 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 	private JSpinner spinner = new JSpinner();
 	private JTabbedPane tabbedPane = new JTabbedPane();
 	private SpinnerListModel sp_model = new SpinnerListModel();
+	private JComboBox cb_sort = new JComboBox();
 	private JTable table;
-	private JComboBox cb_sort;
 	private DefaultTableModel model;
     
 	
@@ -106,11 +107,15 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 		
 		this.b2_del.addActionListener(control);
 		this.b2_del.setActionCommand("del_liste");
+		this.cb_sort.addActionListener(control);
+		this.cb_sort.setActionCommand("sort");
 		
+
+		// Links Panel mit 2 Spalten
 		JPanel panel2 = new JPanel();
 						
 		gl2.setColumns(2);
-		gl2.setRows(2);
+		gl2.setRows(1);
 					    
 		panel2.setLayout(gl2);	
 		
@@ -119,22 +124,33 @@ public class MVCView extends JFrame implements Observer, MVCViewInterface{
 		model = new DefaultTableModel(null, ueberschrift);
 		
 		this.table = new JTable(model);
-			
-		this.cb_sort = new JComboBox();
-		 
-		this.cb_sort.addActionListener(control);
-		this.cb_sort.setActionCommand("sort");
-		
-		panel2.add(new JLabel("Sortieren nach Spalte: "));
-		panel2.add(this.cb_sort);
 		
 		panel2.add(new JScrollPane(table));
-		panel2.add(b2_del);	
+		
+		// Rechtes Panel integriert
+			
+		JPanel panel3 = new JPanel();
+		
+		gl3.setColumns(2);
+		gl3.setRows(3);
+		
+		panel3.setLayout(gl3);
+				
+		panel3.add(new JLabel("Sortieren nach Spalte: "));
+		panel3.add(this.cb_sort);
+		
+		panel3.add(new JLabel(""));
+		panel3.add(new JLabel(""));
+		
+		panel3.add(new JLabel("Auswahl: "));
+		panel3.add(b2_del);		
+				
+		
+		panel2.add(panel3);	
 		
 		
 		this.tabbedPane.addTab("Artikelliste", panel2);
-		
-		
+				
 		add(tabbedPane);
 		
 		pack();
