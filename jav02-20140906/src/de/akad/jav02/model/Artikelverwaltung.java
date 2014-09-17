@@ -136,14 +136,25 @@ public class Artikelverwaltung extends Observable {
 	 * Daten von der Datenbank mit Sortierung laden
 	 * 
 	 * @param spalte String Datenbank Spalte
+	 * @throws Exception 
 	 */
-	public void sortTable(String spalte) {
-		setChanged();
-
-		String sql = "select * from artikel ORDER BY " + spalte;
-		this.loadArtikelFromDBReal(sql);
+	public void sortTable(String spalte) throws Exception {
 		
-		notifyObservers(this.stamm);
+		// Prüfen ob das gewuenschte Sortierfeld in der Datenbanktabelle vorhanden ist
+		if (this.getSpalten().contains(spalte)) {
+		
+			setChanged();
+		
+			String sql = "select * from artikel ORDER BY " + spalte;
+			this.loadArtikelFromDBReal(sql);
+			
+			notifyObservers(this.stamm);
+			
+		} else {
+			throw new Exception ("Illegales Sortierfeld");
+		}
+		
+		
 
 	}
 	

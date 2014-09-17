@@ -78,7 +78,12 @@ public class MainController implements ActionListener {
 		// Sortieren der JTable anhand der Datenbankspalten im Pulldown
 		} else if (arg0.getActionCommand().equals("sort")) {
 			 
-			this.av.sortTable(this.view.getCBSelectedItem());
+			try {
+				this.av.sortTable(this.view.getCBSelectedItem());
+			} catch (Exception e) {
+				// Sollte eine falsche Datenbankspalte übergegeben werden wird eine Exception geworfen.
+				e.printStackTrace();
+			}
 			 
 		}
 		
