@@ -22,14 +22,33 @@ public class Artikelverwaltung extends Observable {
 	private Statement stm = null;
 	private ResultSet rst = null;
 	
+	/**
+	 * 
+	 * Die Artikelverwaltung Klasse mit Werten aus der Datenbank füllen.
+	 * 
+	 */
 	public void initDBData() {
 		this.loadArtikelFromDB();
 	}
 	
+	/**
+	 * 
+	 * Datenstramm zurückgeben
+	 * 
+	 * @return ArrayList<Artikel>
+	 */
 	public ArrayList<Artikel> getDatenstamm() {
 		return stamm;
 	}
 
+	/**
+	 * 
+	 * Artikel zur Datenbank hinzufuegen
+	 * 
+	 * @param name String Name
+	 * @param ek double Einkaufspreis
+	 * @param vk double Verkaufspreis
+	 */
 	public void addArtikel(String name, double ek, double vk) {
 			
 		String query = "INSERT INTO artikel ("
@@ -72,6 +91,12 @@ public class Artikelverwaltung extends Observable {
 
 	}
 	
+	/**
+	 * 
+	 * Artikel löschen mit Datenbank ID
+	 * 
+	 * @param id Datenbank ID
+	 */
 	public void deleteArtikel(int id) {
 		
 		String query = "DELETE FROM artikel WHERE id = ?";
@@ -93,29 +118,55 @@ public class Artikelverwaltung extends Observable {
 		
 	}
 	
+	/**
+	 * 
+	 * Artikel löschen mit Artikel Objekt
+	 * 
+	 * @param a Artikel
+	 */
 	public void deleteArtikel(Artikel a) {
 		
 		this.deleteArtikel(a.getId());
 
 	}
 	
-	public Vector<String> getSpalten() {
-		
-		return this.getSpNamen("artikel");
-	}
-	
+
+	/**
+	 * 
+	 * Daten von der Datenbank mit Sortierung laden
+	 * 
+	 * @param spalte String Datenbank Spalte
+	 */
 	public void sortTable(String spalte) {
 		setChanged();
 
 		String sql = "select * from artikel ORDER BY " + spalte;
 		this.loadArtikelFromDBReal(sql);
+		
 		notifyObservers(this.stamm);
 
 	}
 	
+	/**
+	 * 
+	 * MetaData der Artikeltabelle zurückgeben.
+	 * 
+	 * @return Vector<String>
+	 */
+	public Vector<String> getSpalten() {
+		
+		return this.getSpNamen("artikel");
+	}
+	
+	/**
+	 * 
+	 * Methode zum Auslesen der MetaDaten einer Datenbank Tabelle
+	 * 
+	 * @param tab Datenbank Tabelle
+	 * @return Vector<String> Namen der Tabellenspalten
+	 */
 	private Vector<String> getSpNamen(String tab) {
 	    
-		
 		
 		ResultSet rs   = null;
 	    
@@ -137,14 +188,29 @@ public class Artikelverwaltung extends Observable {
 		
 	}	
 
+	/**
+	 * 
+	 * Alle Artikel Daten aus der Datenbankholen
+	 * 
+	 */
 	private void loadArtikelFromDB() {
 		
 		setChanged();
+
 		this.loadArtikelFromDBReal("select * from artikel");		
+		
 		notifyObservers(this.stamm);
 		
 	}
 	
+	/**
+	 * 
+	 * Alle Artikel Daten aus der Datenbankholen
+	 * 
+	 * Abfrage der Datenbank anhand eines SQL Querys
+	 * 
+	 * @param sql String SQL Query 
+	 */
 	private void loadArtikelFromDBReal(String sql) {
 		
 		stamm.clear();
